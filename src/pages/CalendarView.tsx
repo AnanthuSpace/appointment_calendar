@@ -57,11 +57,7 @@ const CalendarView = () => {
               formatTo12Hour={formatTo12Hour}
               selectedDate={date}
             />
-            <AppointmentForm
-              selectedDate={date}
-              selectedTime={selectedTime}
-              setSelectedTime={setSelectedTime}
-            />
+            <AppointmentForm selectedDate={date} selectedTime={selectedTime} />
           </div>
         </CardContent>
       </Card>

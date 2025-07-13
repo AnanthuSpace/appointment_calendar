@@ -12,11 +12,11 @@ import { toast } from "sonner";
 
 interface Props {
   selectedTime: string | null;
-  setSelectedTime: (time: string) => void;
   selectedDate: Date | undefined;
 }
 
-const AppointmentForm = ({ selectedTime, setSelectedTime, selectedDate }: Props) => {
+
+const AppointmentForm = ({ selectedTime, selectedDate }: Props) => {
   const [appointment, setAppointment] = useState<any | null>(null);
   const [open, setOpen] = useState(false);
 

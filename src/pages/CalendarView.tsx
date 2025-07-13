@@ -4,10 +4,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import CalendarSection from "@/components/CalendarSection";
 import TimeSlotPicker from "@/components/TimeSlotPicker";
 import AppointmentForm from "@/components/AppointmentForm";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const CalendarView = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = React.useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    navigate("/login");
+  };
 
   const timeSlots = Array.from({ length: 37 }, (_, i) => {
     const totalMinutes = i * 15;
@@ -29,9 +37,14 @@ const CalendarView = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold text-center py-6">
-        Frontend Assignment: Appointment Calendar for Clinic Staff
-      </h1>
+      <div className="relative flex items-center justify-start px-6 py-6">
+        <Button variant="outline" onClick={handleLogout}>
+          Logout
+        </Button>
+        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-2xl font-bold text-center">
+          Appointment Calendar
+        </h1>
+      </div>
 
       <Card className="gap-0 p-0">
         <CardContent className="p-0">

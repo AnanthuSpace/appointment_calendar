@@ -20,7 +20,9 @@ const TimeSlotPicker = ({
     selectedDate &&
     now.toDateString() === new Date(selectedDate).toDateString();
 
-  const nowPlus1Hour = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour ahead
+  const isSunday = selectedDate ? new Date(selectedDate).getDay() === 0 : false;
+
+  const nowPlus1Hour = new Date(now.getTime() + 60 * 60 * 1000); 
   const currentMinutes = nowPlus1Hour.getHours() * 60 + nowPlus1Hour.getMinutes();
 
   return (
@@ -31,14 +33,17 @@ const TimeSlotPicker = ({
           const minutes = parseInt(hourStr) * 60 + parseInt(minuteStr);
           const isPast = isToday && minutes < currentMinutes;
 
+          const disabled = isSunday || isPast;
+
           return (
             <Button
               key={time}
               variant={selectedTime === time ? "default" : "outline"}
-              onClick={() => !isPast && setSelectedTime(time)}
+              onClick={() => !disabled && setSelectedTime(time)}
               className={`w-full shadow-none ${
-                isPast ? "opacity-50 line-through pointer-events-none" : ""
+                disabled ? "opacity-50 line-through pointer-events-none" : ""
               }`}
+              disabled={disabled}
             >
               {formatTo12Hour(time)}
             </Button>
